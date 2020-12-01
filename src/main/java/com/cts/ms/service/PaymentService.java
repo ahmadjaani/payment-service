@@ -1,5 +1,6 @@
 package com.cts.ms.service;
 
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,14 @@ public class PaymentService {
 	private PaymentRepository paymentRepository;
 
 	public Payment doPayment(Payment payment) {
+		payment.setPaymentStatus(paymentProcessing());
 		payment.setTransactionId(UUID.randomUUID().toString());
 		return paymentRepository.save(payment);
+	}
+
+	public String paymentProcessing() {
+		// 3rd party payment gateway(paypal, paytm, billdesk etc..) should return payment status
+		return new Random().nextBoolean() ? "success" : "false";
 	}
 
 }
