@@ -8,4 +8,6 @@ import com.cts.ms.entity.Payment;
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 
+	Payment findByOrderId(int orderId);
+
 }
